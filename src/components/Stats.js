@@ -17,7 +17,13 @@ class Stats extends Component {
   }
 
   render() {
-    return <div>{this.state.count}</div>
+    return (
+      <div>
+        <p>Total: {this.state.count}</p>
+        <p>Confirmed: {this.state.confirmed}</p>
+        <p>Unconfirmed: {this.state.unconfirmed}</p>
+      </div>
+    )
   }
 }
 

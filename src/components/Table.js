@@ -41,19 +41,36 @@ class Table extends Component {
         ]
       },
       {
-        Header: 'Email',
-        accessor: 'username',
-        filterable: true
-      },
-      {
-        Header: 'Phone Number',
-        accessor: 'phoneNumber',
-        filterable: true
-      },
-      {
-        Header: 'Subcribed',
-        accessor: 'subscribed',
-        filterable: true
+        Header: 'Details',
+        columns: [
+          {
+            Header: 'Email',
+            accessor: 'username',
+            filterable: true
+          },
+          {
+            Header: 'Phone Number',
+            accessor: 'phoneNumber',
+            filterable: true
+          },
+          {
+            Header: 'Subcribed',
+            accessor: 'subscribed',
+            filterable: true,
+            Cell: row => (
+              <span>
+                <span
+                  style={{
+                    color: row.value ? 'green' : row.value ? 'red' : 'orange',
+                    transition: 'all .5s ease'
+                  }}
+                >
+                  {row.value ? 'Confirmed' : 'Unconfirmed'}
+                </span>
+              </span>
+            )
+          }
+        ]
       }
     ]
 
