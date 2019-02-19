@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ReactTable from 'react-table'
+import { withRouter } from 'react-router-dom'
 import 'react-table/react-table.css'
+import { Container } from 'reactstrap'
 import axios from 'axios'
 
 class Table extends Component {
@@ -21,6 +23,10 @@ class Table extends Component {
         console.log(res.data[0])
         this.setState({ data: res.data })
       })
+  }
+
+  edit(email) {
+    this.props.history.push(`/edit/${email}`)
   }
 
   render() {
@@ -76,11 +82,21 @@ class Table extends Component {
 
     return (
       <div>
-        <ReactTable
-          className="-highlight -striped"
-          data={this.state.data}
-          columns={columns}
-        />
+        <Container>
+          <ReactTable
+            className="-highlight -striped"
+            data={this.state.data}
+            columns={columns}
+            getTrProps={(state, rowInfo, column) => {
+              return {
+                onClick: () => {
+                  console.log(rowInfo.row.username)
+                  console.log(this.props)
+                }
+              }
+            }}
+          />
+        </Container>
       </div>
     )
   }

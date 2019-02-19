@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
-import Table from './components/Table'
-import Stats from './components/Stats'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import './App.css'
+import Home from './components/Home'
+
+class Routes extends Component {
+  render() {
+    return (
+      <Switch>
+        <Route path="/" exact component={Home} />
+      </Switch>
+    )
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <Stats />
-        <Table />
-      </div>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     )
   }
 }

@@ -1,33 +1,28 @@
-.App {
+body {
+  background-color: #eeeeee;
+}
+
+.stats {
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.statCard {
+  background-color: #2e4052;
+  height: 100px;
+  width: 200px;
+  display: inline-block;
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.statCard > * {
+  color: #f5f8f6;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.progressBar {
+  width: 80%;
+  margin: 20px auto;
 }
