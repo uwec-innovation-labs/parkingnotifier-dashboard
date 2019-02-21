@@ -1,28 +1,14 @@
 import React, { Component } from 'react'
 import ReactTable from 'react-table'
-import { withRouter } from 'react-router-dom'
 import 'react-table/react-table.css'
 import { Container } from 'reactstrap'
-import axios from 'axios'
 
 class Table extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: []
-    }
   }
   componentDidMount = () => {
-    axios
-      .get('http://localhost:9000/users', {
-        headers: {
-          token: 'test'
-        }
-      })
-      .then(res => {
-        console.log(res.data[0])
-        this.setState({ data: res.data })
-      })
+    console.log(this.state)
   }
 
   edit(email) {
@@ -85,12 +71,12 @@ class Table extends Component {
         <Container>
           <ReactTable
             className="-highlight -striped"
-            data={this.state.data}
+            loading={this.props.loading}
+            data={this.props.data}
             columns={columns}
             getTrProps={(state, rowInfo, column) => {
               return {
                 onClick: () => {
-                  console.log(rowInfo.row.username)
                   console.log(this.props)
                 }
               }
