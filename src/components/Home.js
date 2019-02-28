@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router'
 import Table from './Table'
 import Stats from './Stats'
 import ProgressBar from './ProgressBar'

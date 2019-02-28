@@ -6,6 +6,9 @@ import { Container } from 'reactstrap'
 class Table extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      details: null
+    }
   }
   componentDidMount = () => {
     console.log(this.state)
@@ -77,11 +80,14 @@ class Table extends Component {
             getTrProps={(state, rowInfo, column) => {
               return {
                 onClick: () => {
-                  console.log(this.props)
+                  this.setState({ details: rowInfo.original })
                 }
               }
             }}
           />
+          <pre>
+            <code>{JSON.stringify(this.state.details, null, 2)}</code>
+          </pre>
         </Container>
       </div>
     )
