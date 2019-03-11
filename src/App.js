@@ -16,8 +16,9 @@ import Dashboard from './components/dashboard/Dashboard'
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken
+  //sets token to header and applies it to every request if logged in, otherwise deletes auth header
   setAuthToken(token)
-  // Decode token and get superuser info and exp
+  // Decode token and get superuser info and expiration
   const decoded = jwt_decode(token)
   // Set superuser and isAuthenticated
   store.dispatch(setCurrentSuperuser(decoded))

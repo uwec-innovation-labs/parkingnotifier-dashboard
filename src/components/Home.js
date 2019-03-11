@@ -18,15 +18,15 @@ class Home extends Component {
     }
   }
   componentDidMount = () => {
-    axios.get('http://localhost:9000/stats').then(res => {
+    axios.get('/stats').then(res => {
       this.setState({ data: res.data })
     })
     axios
-      .get('http://localhost:9000/users', {
-        headers: {
-          token: 'test'
-        }
-      })
+      .get('/users') //, {
+      //   headers: {
+      //     token: 'test'
+      //   }
+      // })
       .then(res => {
         this.setState({ users: res.data, loading: false })
       })
