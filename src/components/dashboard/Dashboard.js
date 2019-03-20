@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logoutSuperuser } from '../../actions/authActions'
 import { notifyUsers } from '../../actions/notifyActions'
+import { Alert } from 'reactstrap'
 
 import Home from '../Home'
 import NotifyModal from '../NotifyModal'
@@ -11,7 +12,8 @@ class Dashboard extends Component {
   constructor() {
     super()
     this.state = {
-      showModal: false
+      showModal: false,
+      messageSent: false
     }
   }
 
@@ -60,7 +62,13 @@ class Dashboard extends Component {
             <NotifyModal
               notifyUsers={() => this.props.notifyUsers()}
               onClose={() => this.setState({ showModal: false })}
+              sentMessage={() => this.setState({ messageSent: true })}
             />
+          )}
+          {this.state.messageSent ? (
+            <Alert color="success">Messages Sent</Alert>
+          ) : (
+            ''
           )}
         </div>
         <Home />

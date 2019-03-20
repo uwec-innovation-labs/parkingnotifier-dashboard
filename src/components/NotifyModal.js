@@ -89,6 +89,8 @@ class NotifyModal extends Component {
     event.preventDefault()
     if (this.state.validConfirmation) {
       this.props.notifyUsers()
+      this.props.sentMessage()
+      this.props.onClose()
     }
   }
 
