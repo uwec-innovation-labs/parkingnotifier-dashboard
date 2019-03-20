@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Label, Form, FormGroup, Input, Button } from 'reactstrap'
+import { Label, Form, FormGroup, Input, Button, Alert } from 'reactstrap'
 
 const styles = {
   background: {
@@ -22,14 +22,32 @@ const styles = {
     width: 650,
     height: 350,
     color: 'black',
-    padding: 50
+    padding: 30
+  },
+  redLabel: {
+    color: 'red'
+  },
+  spacing: {
+    marginLeft: 10
+  },
+  textBody: {
+    color: 'black'
   }
 }
 
 class NotifyModal extends Component {
   constructor(props) {
     super(props)
-    this.state = { validText: false, textBody: '', characterCount: 0 }
+    this.state = {
+      validText: false,
+      textBody: '',
+      characterCount: 0,
+      fullCount: false,
+      nextClicked: false,
+      confirmationPhrase: 'Send the message... please',
+      confirmationBody: '',
+      validConfirmation: true
+    }
 
     this.element = document.createElement('div')
     this.modalRoot = document.getElementById('modalRoot')
@@ -53,8 +71,25 @@ class NotifyModal extends Component {
     this.props.onClose()
   }
 
+  clickedCancel = () => {
+    this.props.onClose()
+  }
+
+  clickedNext = () => {
+    if (this.state.validText) {
+      this.setState({ nextClicked: true })
+    }
+  }
+
+  clickedBack = () => {
+    this.setState({ nextClicked: false })
+  }
+
   handleSubmit = event => {
     event.preventDefault()
+    if (this.state.validConfirmation) {
+      this.props.notifyUsers()
+    }
   }
 
   handleInput = e => {
@@ -72,6 +107,14 @@ class NotifyModal extends Component {
       case 'textBody':
         this.validateTextBody(value)
         this.setState({ characterCount: value.length })
+        if (value.length === 160) {
+          this.setState({ fullCount: true })
+        } else {
+          this.setState({ fullCount: false })
+        }
+        break
+      case 'confirmationBody':
+        this.validateConfirmationBody(value)
         break
       default:
         break
@@ -86,6 +129,14 @@ class NotifyModal extends Component {
     }
   }
 
+  validateConfirmationBody = value => {
+    if (this.state.confirmationBody === this.state.confirmationPhrase) {
+      this.setState({ validConfirmation: true })
+    } else {
+      this.setState({ validConfirmation: false })
+    }
+  }
+
   render() {
     return ReactDOM.createPortal(this._renderModal(), this.element)
   }
@@ -94,20 +145,70 @@ class NotifyModal extends Component {
     return (
       <div style={styles.background} onClick={this.clickedBackground}>
         <div style={styles.container} onClick={e => e.stopPropagation()}>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup style={styles.form}>
-              <Label for="textBody">Text Message Body</Label>
-              <Input
-                type="textarea"
-                id="notify-box"
-                name="textBody"
-                value={this.state.textBody}
-                onChange={event => this.handleInput(event)}
-              />
-              <Label>Character Count: {this.state.characterCount}</Label>
-            </FormGroup>
-            <Button type="submit">Next</Button>
-          </Form>
+          {this.state.nextClicked ? (
+            <Form>
+              <FormGroup>
+                <Label for="textBody">Message:</Label>
+                <br />
+                <Label id="textBody" style={styles.textBody}>
+                  {this.state.textBody}
+                </Label>
+              </FormGroup>
+              <FormGroup>
+                <Label for="confirmationCheck">
+                  Please type the following to confirm you wish to send:
+                </Label>
+                <br />
+                <Label for="confirmationCheck" style={styles.textBody}>
+                  {this.state.confirmationPhrase}
+                </Label>
+                <Input
+                  type="text"
+                  id="confirmationCheck"
+                  name="confirmationBody"
+                  onChange={event => this.handleInput(event)}
+                  autoComplete="off"
+                  value={this.state.confirmationBody}
+                  invalid={!!!this.state.validConfirmation}
+                />
+                {this.state.validConfirmation ? (
+                  ''
+                ) : (
+                  <Alert color="danger">The phrases do not match.</Alert>
+                )}
+              </FormGroup>
+              <FormGroup>
+                <Button onClick={this.clickedBack}>Back</Button>
+                <Button style={styles.spacing} onClick={this.handleSubmit}>
+                  Send Message
+                </Button>
+              </FormGroup>
+            </Form>
+          ) : (
+            <Form>
+              <FormGroup>
+                <Label for="textBody">Text Message Body</Label>
+                <Input
+                  type="textarea"
+                  id="notify-box"
+                  name="textBody"
+                  value={this.state.textBody}
+                  onChange={event => this.handleInput(event)}
+                />
+                {this.state.fullCount ? (
+                  <Label style={styles.redLabel}>
+                    Character Count: {this.state.characterCount}
+                  </Label>
+                ) : (
+                  <Label>Character Count: {this.state.characterCount}</Label>
+                )}
+              </FormGroup>
+              <Button onClick={this.clickedCancel}>Cancel</Button>
+              <Button style={styles.spacing} onClick={this.clickedNext}>
+                Next
+              </Button>
+            </Form>
+          )}
         </div>
       </div>
     )
