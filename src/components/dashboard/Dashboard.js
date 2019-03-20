@@ -27,6 +27,14 @@ class Dashboard extends Component {
     this.setState({ showModal: true })
   }
 
+  sendMessage = messageBody => {
+    const newMessage = {
+      message: messageBody
+    }
+    console.log(newMessage)
+    this.props.notifyUsers(newMessage)
+  }
+
   render() {
     return (
       <div>
@@ -60,13 +68,13 @@ class Dashboard extends Component {
           </button>
           {this.state.showModal && (
             <NotifyModal
-              notifyUsers={() => this.props.notifyUsers()}
+              notifyUsers={this.sendMessage}
               onClose={() => this.setState({ showModal: false })}
               sentMessage={() => this.setState({ messageSent: true })}
             />
           )}
           {this.state.messageSent ? (
-            <Alert color="success">Messages Sent</Alert>
+            <Alert color="success">Message Sent</Alert>
           ) : (
             ''
           )}

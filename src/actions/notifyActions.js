@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { GET_ERRORS, NOTIFY_USERS } from './types'
 
-export const notifyUsers = () => dispatch => {
+export const notifyUsers = messageData => dispatch => {
   axios
-    .get('/dashboard/notify')
+    .post('/dashboard/notify', messageData)
     .then(res => {
       dispatch(sendNotification())
     })

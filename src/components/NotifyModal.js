@@ -44,7 +44,7 @@ class NotifyModal extends Component {
       characterCount: 0,
       fullCount: false,
       nextClicked: false,
-      confirmationPhrase: 'Send the message... please',
+      confirmationPhrase: '...',
       confirmationBody: '',
       validConfirmation: true
     }
@@ -88,7 +88,7 @@ class NotifyModal extends Component {
   handleSubmit = event => {
     event.preventDefault()
     if (this.state.validConfirmation) {
-      this.props.notifyUsers()
+      this.props.notifyUsers(this.state.textBody)
       this.props.sentMessage()
       this.props.onClose()
     }
