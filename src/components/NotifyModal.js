@@ -46,9 +46,9 @@ class NotifyModal extends Component {
       nextClicked: false,
       confirmationPhrase: '...',
       confirmationBody: '',
-      validConfirmation: true
+      validConfirmation: false
     }
-
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.element = document.createElement('div')
     this.modalRoot = document.getElementById('modalRoot')
     this.modalRoot.appendChild(this.element)
@@ -65,6 +65,20 @@ class NotifyModal extends Component {
   keyup = e => {
     if (e.key === 'Escape') {
       this.props.onClose()
+    }
+    if (
+      this.state.nextClicked &&
+      this.state.validConfirmation &&
+      e.key === 'Enter'
+    ) {
+      this.handleSubmit()
+    }
+    if (
+      !!!this.state.nextClicked &&
+      this.state.characterCount > 0 &&
+      e.key === 'Enter'
+    ) {
+      this.setState({ nextClicked: true })
     }
   }
   clickedBackground = () => {
@@ -181,7 +195,12 @@ class NotifyModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Button onClick={this.clickedBack}>Back</Button>
-                <Button style={styles.spacing} onClick={this.handleSubmit}>
+                <Button
+                  style={styles.spacing}
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  disabled={!!!this.state.validConfirmation}
+                >
                   Send Message
                 </Button>
               </FormGroup>
