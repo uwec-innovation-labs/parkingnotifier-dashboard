@@ -11,11 +11,12 @@ class Landing extends Component {
               <b>Welcome to Parking Notifier Dashboard</b>
             </h4>
             <p className="flow-text grey-text text-darken-1">
-              If you are an existing user please login! If not, please register!
+              If you are an existing user please login! If not, talk to your
+              administrator to get registered!
             </p>
             <br />
             <div className="col s6">
-              <Link
+              {/* <Link
                 to="/register"
                 style={{
                   width: '140px',
@@ -25,7 +26,7 @@ class Landing extends Component {
                 className="btn btn-large waves-effect waves-light hoverable blue accent-3"
               >
                 Register
-              </Link>
+              </Link> */}
             </div>
             <div className="col s6">
               <Link
