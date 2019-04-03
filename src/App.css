@@ -26,3 +26,42 @@ body {
   width: 80%;
   margin: 20px auto;
 }
+
+.brand {
+  font-weight: bold;
+  font-family: Roboto, sans-serif;
+  color: rgb(32, 32, 32);
+}
+.brand:hover {
+  color: #303030;
+}
+
+.landing-wrapper {
+  width: 95%;
+  height: 80%;
+  margin: 30px;
+}
+
+.left-pane {
+  position: relative;
+  padding: 10px;
+  float: left;
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  border: #2e4052;
+  border-style: dashed;
+}
+
+.right-pane {
+  position: relative;
+  padding: 5px;
+  background-color: red;
+  float: right;
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  background-image: url('media/dashboard.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
