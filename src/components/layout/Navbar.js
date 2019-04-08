@@ -37,23 +37,6 @@ class NavBar extends Component {
   }
 
   render() {
-    // return (
-    // <div className="navbar-fixed">
-    //   <nav className="z-depth-0">
-    //     <div className="nav-wrapper white">
-    //       <Link
-    //         to="/"
-    //         style={{
-    //           fontFamily: 'roboto'
-    //         }}
-    //         className="col s5 brand-logo center black-text"
-    //       >
-    //         Parking Notifier - Dashboard
-    //       </Link>
-    //     </div>
-    //   </nav>
-    // </div>
-    // )
     return (
       <div>
         <Navbar color="light" expand="md">

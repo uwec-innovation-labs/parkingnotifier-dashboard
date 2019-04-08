@@ -40,8 +40,31 @@ body {
   width: 95%;
   height: 80%;
   margin: 30px;
+  text-align: center;
 }
 
+.landing-wrapper h3 {
+  color: #8d8585;
+  margin: 10px 200px 10px 200px;
+  font-size: 1.5em;
+}
+
+.landing-wrapper h1 {
+  font-weight: bold;
+  font-size: 2.5em;
+  padding-top: 10px;
+}
+
+.landing-wrapper .button {
+  margin: 15px;
+}
+
+#logo {
+  width: 30%;
+  height: 30%;
+  padding-bottom: 30px;
+}
+/* 
 .left-pane {
   position: relative;
   padding: 10px;
@@ -50,18 +73,26 @@ body {
   width: 50%;
   height: 100%;
   border: #2e4052;
-  border-style: dashed;
+  border-style: solid;
 }
 
 .right-pane {
   position: relative;
-  padding: 5px;
-  background-color: red;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
   float: right;
   box-sizing: border-box;
-  width: 50%;
+  width: 45%;
   height: 100%;
+  background-color: #2e4052;
   background-image: url('media/dashboard.png');
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+.image-pane {
+  position: relative;
+  width: 100%;
+}  */
