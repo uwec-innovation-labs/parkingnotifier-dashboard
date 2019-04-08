@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { logoutSuperuser } from '../../actions/authActions'
 import {
   Button,
   Collapse,
@@ -20,8 +23,7 @@ class NavBar extends Component {
 
     this.toggle = this.toggle.bind(this)
     this.state = {
-      isOpen: false,
-      onLanding: false
+      isOpen: false
     }
   }
   toggle() {
@@ -30,10 +32,9 @@ class NavBar extends Component {
     })
   }
 
-  componentWillMount() {
-    if (true) {
-      this.setState({ onLanding: true })
-    }
+  onLogoutClick = e => {
+    e.preventDefault()
+    this.props.logoutSuperuser()
   }
 
   render() {
@@ -44,14 +45,13 @@ class NavBar extends Component {
             Parking Notifier Dashboard
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
-            {this.state.onLanding ? (
-              <Button color="primary" href="/login">
-                Log In
+            {this.props.auth.isAuthenticated ? (
+              <Button color="primary" onClick={this.onLogoutClick}>
+                Log Out
               </Button>
             ) : (
-              // get better functionality on this
-              <Button color="primary" href="/">
-                Log Out
+              <Button color="primary" href="/login">
+                Log In
               </Button>
             )}
           </Nav>
@@ -85,4 +85,16 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar
+NavBar.propTypes = {
+  logoutSuperuser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(
+  mapStateToProps,
+  { logoutSuperuser }
+)(NavBar)

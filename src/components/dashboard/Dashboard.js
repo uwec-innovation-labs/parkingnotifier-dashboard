@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logoutSuperuser } from '../../actions/authActions'
 import { notifyUsers } from '../../actions/notifyActions'
 import { Alert } from 'reactstrap'
 
@@ -15,11 +14,6 @@ class Dashboard extends Component {
       showModal: false,
       messageSent: false
     }
-  }
-
-  onLogoutClick = e => {
-    e.preventDefault()
-    this.props.logoutSuperuser()
   }
 
   onNotifyClick = e => {
@@ -38,21 +32,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        {/* logout button */}
         <div className="row">
-          <button
-            style={{
-              width: '150px',
-              borderRadius: '3px',
-              letterSpacing: '1.5px',
-              margin: '1rem'
-            }}
-            onClick={this.onLogoutClick}
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3 "
-          >
-            Logout
-          </button>
-
           {/* notify users button */}
           <button
             style={{
@@ -86,7 +66,6 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  logoutSuperuser: PropTypes.func.isRequired,
   notifyUsers: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   notify: PropTypes.object.isRequired
@@ -99,5 +78,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutSuperuser, notifyUsers }
+  { notifyUsers }
 )(Dashboard)
