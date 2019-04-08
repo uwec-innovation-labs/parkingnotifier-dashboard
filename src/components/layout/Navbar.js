@@ -39,7 +39,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="navbar-wrapper">
         <Navbar color="light" expand="md">
           <NavbarBrand href="/" className="brand">
             Parking Notifier Dashboard

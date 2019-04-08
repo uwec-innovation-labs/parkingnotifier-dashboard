@@ -1,82 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { notifyUsers } from '../../actions/notifyActions'
-import { Alert } from 'reactstrap'
 
-import Home from '../Home'
-import NotifyModal from '../NotifyModal'
+import Sidebar from '../layout/Sidebar'
+import Content from '../layout/Content'
 
 class Dashboard extends Component {
   constructor() {
     super()
-    this.state = {
-      showModal: false,
-      messageSent: false
-    }
-  }
-
-  onNotifyClick = e => {
-    e.preventDefault()
-    this.setState({ showModal: true })
-  }
-
-  sendMessage = messageBody => {
-    const newMessage = {
-      message: messageBody
-    }
-    console.log(newMessage)
-    this.props.notifyUsers(newMessage)
+    this.state = {}
   }
 
   render() {
     return (
-      <div>
-        <div className="row">
-          {/* notify users button */}
-          <button
-            style={{
-              width: '150px',
-              borderRadius: '3px',
-              letterSpacing: '1.5px',
-              margin: '1rem'
-            }}
-            onClick={() => this.setState({ showModal: true })}
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3 "
-          >
-            Notify
-          </button>
-          {this.state.showModal && (
-            <NotifyModal
-              notifyUsers={this.sendMessage}
-              onClose={() => this.setState({ showModal: false })}
-              sentMessage={() => this.setState({ messageSent: true })}
-            />
-          )}
-          {this.state.messageSent ? (
-            <Alert color="success">Message Sent</Alert>
-          ) : (
-            ''
-          )}
-        </div>
-        <Home />
+      <div className="dashboard-wrapper">
+        <Sidebar />
+        <Content />
       </div>
     )
   }
 }
 
 Dashboard.propTypes = {
-  notifyUsers: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  notify: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  notify: state.notify
+  auth: state.auth
 })
 
-export default connect(
-  mapStateToProps,
-  { notifyUsers }
-)(Dashboard)
+export default connect(mapStateToProps)(Dashboard)
